@@ -1,0 +1,11 @@
+{
+  "name": "valtown",
+  "owner": { "name": "Val Town" },
+  "plugins": [
+    {
+      "name": "vals",
+      "source": ".",
+      "description": "Val Town MCP server + platform skills for building and deploying vals."
+    }
+  ]
+}

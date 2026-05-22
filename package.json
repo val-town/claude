@@ -1,0 +1,37 @@
+{
+  "name": "@valtown/skills",
+  "version": "0.1.0",
+  "description": "Val Town platform skills — guidance for building on Val Town, usable as a library and as a Claude Code plugin.",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "skills",
+    ".claude-plugin",
+    ".mcp.json"
+  ],
+  "scripts": {
+    "generate": "node scripts/build.mjs",
+    "build": "npm run generate && tsc -p tsconfig.json",
+    "test": "npm run build && node --test",
+    "prepare": "npm run build"
+  },
+  "devDependencies": {
+    "js-yaml": "^4.1.0",
+    "typescript": "^5.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/val-town/claude.git"
+  },
+  "homepage": "https://val.town",
+  "publishConfig": {
+    "access": "public"
+  }
+}
