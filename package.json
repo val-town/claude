@@ -11,10 +11,7 @@
     }
   },
   "files": [
-    "dist",
-    "skills",
-    ".claude-plugin",
-    ".mcp.json"
+    "dist"
   ],
   "scripts": {
     "generate": "node scripts/build.mjs",

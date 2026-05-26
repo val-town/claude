@@ -38,7 +38,7 @@ build time, so it works in any runtime/bundler.
 
 ## Authoring skills
 
-Skills live in `skills/<name>/SKILL.md` with YAML frontmatter:
+Skills live in `plugin/skills/<name>/SKILL.md` with YAML frontmatter:
 
 ```markdown
 ---
