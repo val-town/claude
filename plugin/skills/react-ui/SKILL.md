@@ -6,7 +6,7 @@ triggers: [react, jsx, tsx, ui, frontend, component, dashboard, page, app, twind
 
 # React UI
 
-For any val that renders a UI, prefer to build it with React components in `.tsx` files, unless the user states otherwise. The `std/reactHonoStarter` template is set up for this — start there with `remix_val` instead of building from scratch.
+For any val that renders a UI, prefer to build it with React components in `.tsx` files, unless the user states otherwise. The `templates/react-hono-starter` template is set up for this — start there with `remix_val` instead of building from scratch.
 
 ## File conventions
 
