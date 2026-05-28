@@ -28,12 +28,6 @@ This makes the platform skills available to Claude and registers the hosted
 Val Town MCP server (`https://api.val.town/v3/mcp`). On first use of an MCP tool,
 Claude Code runs the OAuth flow in your browser.
 
-## Relationship to the Val Town monorepo
-
-This package is the source of truth for skill content. The Val Town app and MCP
-server consume it as a dependency rather than holding their own copy. See
-`docs/SKILLS_PLUGIN.md` in the main repo for the full design.
-
 ## Contributing
 
 ### Authoring skills
@@ -72,6 +66,12 @@ npm test        # build + smoke tests
 `npm run generate` validates every skill against both our schema and Claude
 Code's frontmatter constraints — a skill that wouldn't load in Claude Code
 fails the build.
+
+### Relationship to the Val Town monorepo
+
+This package is the source of truth for skill content. The Val Town app and MCP
+server consume it as a dependency rather than holding their own copy. See
+`docs/SKILLS_PLUGIN.md` in the main repo for the full design.
 
 ### Versioning
 
