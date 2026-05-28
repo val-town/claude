@@ -6,11 +6,11 @@ triggers: [react, jsx, tsx, ui, frontend, component, dashboard, page, app, twind
 
 # React UI
 
-For any val that renders a UI, build it with React components in `.tsx` files. The `std/reactHonoStarter` template is set up for this — start there with `remix_val` instead of building from scratch.
+For any val that renders a UI, prefer to build it with React components in `.tsx` files, unless the user states otherwise. The `templates/react-hono-starter` template is set up for this — start there with `remix_val` instead of building from scratch.
 
 ## File conventions
 
-Put markup, styles, and scripts in real files — never inside template literal strings (e.g. `new Response(\`<html>...</html>\`)`). Code in template strings has no syntax highlighting, no linting, no type checking, and is unreviewable.
+Put markup, styles, and scripts in real files — avoid template literal strings (e.g. `new Response(\`<html>...</html>\`)`). Code in template strings has no syntax highlighting, no linting, no type checking, and is unreviewable.
 
 - `.tsx` — React/JSX components, any UI with logic or interactivity
 - `.html` — purely static markup
@@ -20,7 +20,7 @@ Build UI **component by component** in `.tsx` files. Compose small components ra
 
 ## Styling: Twind + Tailwind
 
-Use Twind to apply Tailwind utility classes at runtime — no build step required. Add the script to your HTML shell:
+Prefer Twind to apply Tailwind utility classes at runtime — no build step required. Add the script to your HTML shell:
 
 ```html
 <script src="https://cdn.twind.style" crossorigin></script>
@@ -34,11 +34,11 @@ Then use Tailwind classes directly in JSX:
 </div>
 ```
 
-Do **not** use inline `<style>` tags, CSS-in-JS objects, or separate `.css` files. Stick to utility classes.
+Avoid inline `<style>` tags, CSS-in-JS objects, or separate `.css` files, unless the user says otherwise.
 
-## View source link (required)
+## View source link
 
-Every UI val must expose a way for users to see and remix its source. Both parts are required:
+Every UI val should expose a way for users to see and remix its source. Both parts are required:
 
 1. Backend route:
    ```ts
