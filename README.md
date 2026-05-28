@@ -1,22 +1,26 @@
-# @valtown/skills
+# Claude Code plugin for Val Town
 
-Platform guidance for building on [Val Town](https://val.town) — the single
-source of truth for the "how to write a val" knowledge used by Val Town's own
-tools (Townie, the MCP server) and by AI coding tools like Claude Code.
+Installs the Val Town MCP server and skills for Claude Code.
+
+Contains platform guidance for building on [Val Town](https://val.town) — the 
+single source of truth for the "how to write a val" knowledge used by Val Town's 
+own tools (Townie, the MCP server) and by AI coding tools like Claude Code.
 
 Each skill is a short markdown guide covering one platform topic (HTTP vals,
 cron/intervals, SQLite, email, OAuth, React UI, third-party integrations,
-templates). This repo ships them two ways from one source:
+templates).
 
-- **As a Claude Code plugin** — install from this repo; Claude Code loads the
-  skills natively and bundles the Val Town MCP server.
-- **As an npm library** — `@valtown/skills` exports the skill content and a
-  search function for embedding in other tools.
+## Install
 
-## Install as a Claude Code plugin
+Start a `claude` session, then run:
 
 ```
-/plugin marketplace add val-town/claude
+/plugin marketplace add val-town/plugins
+```
+
+Then run:
+
+```
 /plugin install vals@valtown
 ```
 
@@ -24,19 +28,9 @@ This makes the platform skills available to Claude and registers the hosted
 Val Town MCP server (`https://api.val.town/v3/mcp`). On first use of an MCP tool,
 Claude Code runs the OAuth flow in your browser.
 
-## Use as a library
+## Contributing
 
-```ts
-import { skills, skillList, searchSkills } from "@valtown/skills";
-
-skills["http-endpoints"].body;        // the full guide
-searchSkills("store data in a database"); // ranked matches, bodies inline
-```
-
-No filesystem access at runtime — the content is compiled into TypeScript at
-build time, so it works in any runtime/bundler.
-
-## Authoring skills
+### Authoring skills
 
 Skills live in `plugin/skills/<name>/SKILL.md` with YAML frontmatter:
 
@@ -73,13 +67,13 @@ npm test        # build + smoke tests
 Code's frontmatter constraints — a skill that wouldn't load in Claude Code
 fails the build.
 
-## Relationship to the Val Town monorepo
+### Relationship to the Val Town monorepo
 
 This package is the source of truth for skill content. The Val Town app and MCP
 server consume it as a dependency rather than holding their own copy. See
 `docs/SKILLS_PLUGIN.md` in the main repo for the full design.
 
-## Contributing
+### Versioning
 
 This repository uses [Changesets](https://github.com/changesets/changesets)
 for publishing. See their documentation for more information.
