@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "js-yaml": "^4.1.0",
+    "@changesets/cli": "^2.31.0",
     "typescript": "^5.7.0"
   },
   "repository": {
@@ -30,8 +31,5 @@
   "homepage": "https://val.town",
   "publishConfig": {
     "access": "public"
-  },
-  "dependencies": {
-    "@changesets/cli": "^2.31.0"
   }
 }
