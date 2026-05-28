@@ -30,5 +30,8 @@
   "homepage": "https://val.town",
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@changesets/cli": "^2.31.0"
   }
 }
