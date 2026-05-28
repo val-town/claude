@@ -78,3 +78,15 @@ fails the build.
 This package is the source of truth for skill content. The Val Town app and MCP
 server consume it as a dependency rather than holding their own copy. See
 `docs/SKILLS_PLUGIN.md` in the main repo for the full design.
+
+## Contributing
+
+This repository uses [Changesets](https://github.com/changesets/changesets)
+for publishing. See their documentation for more information.
+
+- For each change that should trigger a new version, you should run `npx @changesets/cli`
+  and fill out the interactive prompts to describe the changes. This will generate
+  a new changeset in the `.changesets` directory.
+- Each change in that directory will prompt the `release.yml` GitHub action
+  to create a new release PR.
+- Merging a release PR will automatically publish a new version of this module.
