@@ -1,4 +1,4 @@
-# @valtown/skills
+# Claude Code plugin for Val Town
 
 Platform guidance for building on [Val Town](https://val.town) — the single
 source of truth for the "how to write a val" knowledge used by Val Town's own
@@ -8,7 +8,7 @@ Each skill is a short markdown guide covering one platform topic (HTTP vals,
 cron/intervals, SQLite, email, OAuth, React UI, third-party integrations,
 templates).
 
-## Install Claude Code plugin
+## Install
 
 Start a `claude` session, then run:
 
@@ -26,7 +26,15 @@ This makes the platform skills available to Claude and registers the hosted
 Val Town MCP server (`https://api.val.town/v3/mcp`). On first use of an MCP tool,
 Claude Code runs the OAuth flow in your browser.
 
-## Authoring skills
+## Relationship to the Val Town monorepo
+
+This package is the source of truth for skill content. The Val Town app and MCP
+server consume it as a dependency rather than holding their own copy. See
+`docs/SKILLS_PLUGIN.md` in the main repo for the full design.
+
+## Contributing
+
+### Authoring skills
 
 Skills live in `plugin/skills/<name>/SKILL.md` with YAML frontmatter:
 
@@ -63,13 +71,7 @@ npm test        # build + smoke tests
 Code's frontmatter constraints — a skill that wouldn't load in Claude Code
 fails the build.
 
-## Relationship to the Val Town monorepo
-
-This package is the source of truth for skill content. The Val Town app and MCP
-server consume it as a dependency rather than holding their own copy. See
-`docs/SKILLS_PLUGIN.md` in the main repo for the full design.
-
-## Contributing
+### Versioning
 
 This repository uses [Changesets](https://github.com/changesets/changesets)
 for publishing. See their documentation for more information.
