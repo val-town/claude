@@ -30,6 +30,7 @@
   },
   "homepage": "https://val.town",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   }
 }
