@@ -1,6 +1,6 @@
 {
   "name": "@valtown/skills",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Val Town platform skills — guidance for building on Val Town, usable as a library and as a Claude Code plugin.",
   "license": "MIT",
   "type": "module",
@@ -21,7 +21,8 @@
   },
   "devDependencies": {
     "js-yaml": "^4.1.0",
-    "typescript": "^5.7.0"
+    "@changesets/cli": "^2.31.0",
+    "typescript": "^6.0.0"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
   },
   "homepage": "https://val.town",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   }
 }
