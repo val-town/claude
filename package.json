@@ -17,6 +17,7 @@
     "generate": "node scripts/build.mjs",
     "build": "npm run generate && tsc -p tsconfig.json",
     "test": "npm run build && node --test",
+    "version": "changeset version && node scripts/sync-plugin-version.mjs",
     "prepare": "npm run build"
   },
   "devDependencies": {
