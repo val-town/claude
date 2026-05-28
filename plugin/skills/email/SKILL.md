@@ -1,7 +1,7 @@
 ---
 name: email
 description: Use when a val sends email, receives email, or is triggered by an incoming email. Covers email-type vals (the Email handler shape, attachment limits, the assigned val email address) and sending mail via std/email.
-triggers: [email, mail, inbox, send, sending, smtp, attachment, message, notification]
+triggers: [email, mail, inbox, send, sending, smtp, imap, attachment, message, notification]
 ---
 
 # Email
