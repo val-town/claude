@@ -15,7 +15,7 @@ templates).
 Start a `claude` session, then run:
 
 ```
-/plugin marketplace add val-town/claude
+/plugin marketplace add val-town/plugins
 ```
 
 Then run:
