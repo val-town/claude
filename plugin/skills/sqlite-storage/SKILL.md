@@ -1,6 +1,6 @@
 ---
 name: sqlite-storage
-description: Use when a val needs to store structured or relational data. Covers the std/sqlite API, parameterized queries, transactions, and the per-val vs per-user database distinction.
+description: Use when a val needs to store structured or relational data. Covers the std/sqlite API, parameterized queries, transactions, and the val-scoped vs organization-scoped database distinction.
 triggers: [sqlite, database, sql, persistence, storage, table, query, migration]
 ---
 
