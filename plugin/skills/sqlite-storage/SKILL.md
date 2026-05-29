@@ -39,14 +39,14 @@ await sqlite.batch([
 ]);
 ```
 
-## Per-val vs per-user databases
+## Per-val vs organization databases
 
-The import path determines isolation, and the two return different row shapes:
+The import path determines which database you get. Both expose the same `@libsql/client` API (`execute`, `batch`) and return rows as keyed objects (`Record<string, unknown>[]`):
 
-- `std/sqlite/main.ts` — **per-val** database. Rows are returned as `Record<string, unknown>[]`. This is the default for new vals.
-- `std/sqlite` or `std/sqlite/global.ts` — **per-user** database, shared across all of the user's vals. Rows are returned as `any[][]` (positional arrays, not keyed objects).
+- `std/sqlite/main.ts` — **val-scoped** database, isolated to this val. The default for new vals, and what you almost always want.
+- `std/sqlite/global.ts` — **organization-scoped** database, shared across all vals in the org.
 
-Do not switch an existing val between these import paths — it changes which database the val reads and writes.
+Do not switch an existing val between these import paths — it changes which database the val reads and writes. (A legacy per-user database also exists, exported separately as `std/sqlite2`; prefer the two above for new code.)
 
 ## Querying org-owned vals via tools
 
