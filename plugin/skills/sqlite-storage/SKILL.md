@@ -44,9 +44,9 @@ await sqlite.batch([
 The import path determines which database you get. Both expose the same `@libsql/client` API (`execute`, `batch`) and return rows as keyed objects (`Record<string, unknown>[]`):
 
 - `std/sqlite/main.ts` — **val-scoped** database, isolated to this val. The default for new vals, and what you almost always want.
-- `std/sqlite/global.ts` — **organization-scoped** database, shared across all vals in the org.
+- `std/sqlite/global.ts` — **organization-scoped** database, shared across every val owned by the same account. (Your personal account counts as its own organization here, so this database is shared across all of your vals.)
 
-Do not switch an existing val between these import paths — it changes which database the val reads and writes. (A legacy per-user database also exists, exported separately as `std/sqlite2`; prefer the two above for new code.)
+Do not switch an existing val between these import paths — it changes which database the val reads and writes.
 
 ## Querying org-owned vals via tools
 

@@ -25,7 +25,7 @@ import {
 
 - `GET /auth/login` — starts the login flow
 - `GET /auth/callback` — completes the login flow
-- `POST /auth/logout` — clears the session (POST only; a GET returns 405)
+- `POST /auth/logout` — clears the session
 
 Export the wrapped handler as the val's default:
 
@@ -53,7 +53,6 @@ app.get("/", async (c) => {
   if (session?.user) {
     return c.html(
       `<p>Logged in as ${session.user.username}</p>` +
-      // Logout is POST-only — use a form, not an <a href> (a GET returns 405).
       `<form method="POST" action="/auth/logout"><button>Log out</button></form>`
     );
   }

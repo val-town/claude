@@ -50,7 +50,7 @@ await email({
 });
 ```
 
-`std/email` exports `email` as the send function itself — call it directly (`email({ ... })`); there is no `email.send` method. It accepts the shape you'd expect: `to`, `subject`, `text`, `html`, plus `from`, `cc`, `bcc`, `replyTo`, `attachments`, and `headers`. By default mail is sent from the val owner's address.
+`std/email` exports `email` as the send function itself — call it directly (`email({ ... })`); there is no `email.send` method. It accepts the shape you'd expect: `to`, `subject`, `text`, `html`, plus `from`, `cc`, `bcc`, `replyTo`, `attachments`, and `headers`. If no `to` field is specified, it defaults to sending mail to the val owner's address.
 
 ## Replying to an incoming message
 
