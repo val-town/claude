@@ -14,13 +14,13 @@ Map the user's intent to the closest starter:
 
 | Project shape | Template |
 | --- | --- |
-| Interactive web app (dashboard, SaaS, CRUD, form, anything with client-side state) | `std/reactHonoStarter` |
-| Static page (landing page, link-in-bio, simple docs) | `std/basic-html-starter` |
+| Interactive web app (dashboard, SaaS, CRUD, form, anything with client-side state) | `templates/react-hono-starter` |
+| Static page (landing page, link-in-bio, simple docs) | `templates/basic-html-starter` |
 | AI agent built with OpenAI Agents SDK | `templates/openai-agents` |
 | AI agent, model-agnostic (Vercel AI SDK) | `templates/vercel-ai-agent-demo` |
 | Webhook + AI + dashboard (lead qualification, enrichment) | `templates/leads` |
 | Webhook + enrichment + Slack | `templates/new-user-enrichment` |
-| Telegram bot | `templates/telegramBotStarter` |
+| Telegram bot | `templates/telegram-bot-starter` |
 
 Full list of official starters: https://www.val.town/orgs/templates
 
