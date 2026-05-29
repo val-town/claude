@@ -25,7 +25,7 @@ import {
 
 - `GET /auth/login` — starts the login flow
 - `GET /auth/callback` — completes the login flow
-- `GET /auth/logout` — clears the session
+- `POST /auth/logout` — clears the session
 
 Export the wrapped handler as the val's default:
 
@@ -53,7 +53,7 @@ app.get("/", async (c) => {
   if (session?.user) {
     return c.html(
       `<p>Logged in as ${session.user.username}</p>` +
-      `<a href="/auth/logout">Log out</a>`
+      `<form method="POST" action="/auth/logout"><button>Log out</button></form>`
     );
   }
   return c.html(`<a href="/auth/login">Log in with Val Town</a>`);

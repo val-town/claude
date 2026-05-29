@@ -1,6 +1,6 @@
 ---
 name: sqlite-storage
-description: Use when a val needs to store structured or relational data. Covers the std/sqlite API, parameterized queries, transactions, and the per-val vs per-user database distinction.
+description: Use when a val needs to store structured or relational data. Covers the std/sqlite API, parameterized queries, transactions, and the val-scoped vs organization-scoped database distinction.
 triggers: [sqlite, database, sql, persistence, storage, table, query, migration]
 ---
 
@@ -39,12 +39,12 @@ await sqlite.batch([
 ]);
 ```
 
-## Per-val vs per-user databases
+## Per-val vs organization databases
 
-The import path determines isolation, and the two return different row shapes:
+The import path determines which database you get. Both expose the same `@libsql/client` API (`execute`, `batch`) and return rows as keyed objects (`Record<string, unknown>[]`):
 
-- `std/sqlite/main.ts` — **per-val** database. Rows are returned as `Record<string, unknown>[]`. This is the default for new vals.
-- `std/sqlite` or `std/sqlite/global.ts` — **per-user** database, shared across all of the user's vals. Rows are returned as `any[][]` (positional arrays, not keyed objects).
+- `std/sqlite/main.ts` — **val-scoped** database, isolated to this val. The default for new vals, and what you almost always want.
+- `std/sqlite/global.ts` — **organization-scoped** database, shared across every val owned by the same account. (Your personal account counts as its own organization here, so this database is shared across all of your vals.)
 
 Do not switch an existing val between these import paths — it changes which database the val reads and writes.
 

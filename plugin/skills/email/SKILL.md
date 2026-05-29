@@ -43,24 +43,24 @@ For outgoing mail, import from `std/email`:
 ```ts
 import { email } from "https://esm.town/v/std/email";
 
-await email.send({
+await email({
   to: "user@example.com",
   subject: "Hello",
   text: "Message body",
 });
 ```
 
-`email.send` accepts the same shape you'd expect: `to`, `subject`, `text`, `html`, and standard fields. By default mail is sent from the val owner's address.
+`std/email` exports `email` as the send function itself — call it directly (`email({ ... })`); there is no `email.send` method. It accepts the shape you'd expect: `to`, `subject`, `text`, `html`, plus `from`, `cc`, `bcc`, `replyTo`, `attachments`, and `headers`. If no `to` field is specified, it defaults to sending mail to the val owner's address.
 
 ## Replying to an incoming message
 
-Combine the two — read the inbound `from` in an email-type handler, then call `email.send` to reply:
+Combine the two — read the inbound `from` in an email-type handler, then call `email` to reply:
 
 ```ts
 import { email } from "https://esm.town/v/std/email";
 
 export default async function (e: Email) {
-  await email.send({
+  await email({
     to: e.from,
     subject: `Re: ${e.subject ?? ""}`,
     text: "Got it, thanks!",
