@@ -7,7 +7,7 @@
     "name": "Val Town"
   },
   "homepage": "https://val.town",
-  "repository": "https://github.com/val-town/claude",
+  "repository": "https://github.com/val-town/plugins",
   "license": "MIT",
   "keywords": [
     "val-town",

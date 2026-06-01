@@ -12,6 +12,8 @@ templates).
 
 ## Install
 
+### Claude Code
+
 Start a `claude` session, then run:
 
 ```
@@ -24,9 +26,23 @@ Then run:
 /plugin install vals@valtown
 ```
 
-This makes the platform skills available to Claude and registers the hosted
-Val Town MCP server (`https://api.val.town/v3/mcp`). On first use of an MCP tool,
-Claude Code runs the OAuth flow in your browser.
+### OpenAI Codex
+
+Add the marketplace, then install the plugin:
+
+```
+codex plugin marketplace add val-town/plugins
+codex /plugins
+```
+
+Codex reads the native marketplace at `.agents/plugins/marketplace.json` (and
+falls back to the Claude `.claude-plugin/marketplace.json` for compatibility).
+
+---
+
+Either way, this makes the platform skills available to the agent and registers
+the hosted Val Town MCP server (`https://api.val.town/v3/mcp`). On first use of
+an MCP tool, the agent runs the OAuth flow in your browser.
 
 ## Contributing
 
