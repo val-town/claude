@@ -1,32 +1,92 @@
-# Claude Code plugin for Val Town
+# Val Town for AI coding agents
 
-Installs the Val Town MCP server and skills for Claude Code.
+Build and deploy on [Val Town](https://val.town) from any AI coding agent.
 
-Contains platform guidance for building on [Val Town](https://val.town) — the 
-single source of truth for the "how to write a val" knowledge used by Val Town's 
-own tools (Townie, the MCP server) and by AI coding tools like Claude Code.
+This package gives your agent two things:
 
-Each skill is a short markdown guide covering one platform topic (HTTP vals,
-cron/intervals, SQLite, email, OAuth, React UI, third-party integrations,
-templates).
+- **The Val Town MCP server** — tools to create, edit, run, and deploy vals,
+  query SQLite and blob storage, read logs and traces, and more. It speaks the
+  [Model Context Protocol](https://modelcontextprotocol.io), an open standard,
+  so it works with any MCP-compatible client.
+- **Platform skills** — short markdown guides covering one Val Town topic each
+  (HTTP vals, cron/intervals, SQLite, email, OAuth, React UI, third-party
+  integrations, templates). These are the single source of truth for "how to
+  write a val," shared by Val Town's own tools (Townie, the MCP server) and
+  external agents alike.
 
-## Install
+The MCP server is hosted at `https://api.val.town/v3/mcp` and serves both the
+tools and the skill content (via its `find_val_town_skills` tool), so any agent
+that connects gets the full experience. It's a remote MCP server with OAuth —
+connecting grants the agent the same access as your Val Town account, and it
+runs an OAuth flow in your browser on first use.
 
-Start a `claude` session, then run:
+## Connect
+
+### Claude Code
+
+The richest setup: the plugin bundles the MCP server and pre-loads the skills as
+native Claude Code skills. Start a `claude` session, then run:
 
 ```
 /plugin marketplace add val-town/plugins
-```
-
-Then run:
-
-```
 /plugin install vals@valtown
 ```
 
-This makes the platform skills available to Claude and registers the hosted
-Val Town MCP server (`https://api.val.town/v3/mcp`). On first use of an MCP tool,
-Claude Code runs the OAuth flow in your browser.
+### Codex CLI
+
+```bash
+codex mcp add valtown --url https://api.val.town/v3/mcp
+```
+
+Codex detects OAuth support and opens your browser to authorize on first use.
+
+### Cursor
+
+Add to your project's `.cursor/mcp.json` (or the global one):
+
+```json
+{
+  "mcpServers": {
+    "valtown": {
+      "url": "https://api.val.town/v3/mcp"
+    }
+  }
+}
+```
+
+Cursor shows a `Needs login` prompt — click it to authorize.
+
+### VS Code (Copilot)
+
+Run **MCP: Add Server** from the Command Palette, choose **HTTP**, and enter:
+
+- **Name:** `valtown`
+- **URL:** `https://api.val.town/v3/mcp`
+
+### Any other MCP client
+
+Point it at the streamable HTTP endpoint and follow your client's instructions
+for adding a remote MCP server:
+
+```
+https://api.val.town/v3/mcp
+```
+
+## Use the skills as a library
+
+The skills are also published to npm as `@valtown/skills`, so you can embed the
+same guidance in your own tools:
+
+```bash
+npm install @valtown/skills
+```
+
+```ts
+import { getSkills, searchSkills } from "@valtown/skills";
+
+const all = getSkills();                         // the full catalog
+const hits = searchSkills("how do I store data in a val?"); // ranked matches
+```
 
 ## Contributing
 
@@ -47,13 +107,12 @@ triggers: [http, endpoint, webhook, api, request, response]
 ```
 
 - `name` (required) — must match the directory name; lowercase, hyphens, ≤64 chars.
-- `description` (required) — written as "Use when…"; this is how Claude decides
+- `description` (required) — written as "Use when…"; this is how an agent decides
   to load the skill. ≤1024 chars.
-- `triggers` (optional) — keyword hints that boost `searchSkills` ranking;
-  ignored by Claude Code's native loader.
+- `triggers` (optional) — keyword hints that boost `searchSkills` ranking.
 
-Keep content **audience-neutral**: only platform knowledge true for every
-consumer. No product-flow or chat-only advice.
+Keep content **agent-neutral**: only platform knowledge true for every consumer.
+No product-flow or single-tool-only advice.
 
 Then build:
 
@@ -63,9 +122,9 @@ npm run build   # generate src/generated/skills.ts, then tsc
 npm test        # build + smoke tests
 ```
 
-`npm run generate` validates every skill against both our schema and Claude
-Code's frontmatter constraints — a skill that wouldn't load in Claude Code
-fails the build.
+`npm run generate` validates every skill against both our schema and the
+frontmatter constraints of supported clients — a skill that wouldn't load fails
+the build.
 
 ### Relationship to the Val Town monorepo
 
