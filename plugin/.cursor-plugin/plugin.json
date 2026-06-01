@@ -1,0 +1,13 @@
+{
+  "name": "vals",
+  "displayName": "Val Town",
+  "version": "0.1.2",
+  "description": "Build and deploy on Val Town. Bundles the Val Town MCP server and platform skills (HTTP vals, cron/intervals, SQLite, email, OAuth, React UI, third-party integrations, templates).",
+  "author": {
+    "name": "Val Town",
+    "url": "https://val.town"
+  },
+  "license": "MIT",
+  "keywords": ["val-town", "deno", "serverless", "typescript", "cursor", "mcp"],
+  "logo": "assets/icon.svg"
+}
