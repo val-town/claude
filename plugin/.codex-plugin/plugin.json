@@ -16,6 +16,7 @@
     "longDescription": "Bundles the hosted Val Town MCP server and platform skills (HTTP vals, cron/intervals, SQLite, email, OAuth, React UI, third-party integrations, templates) for building and deploying TypeScript on Val Town.",
     "developerName": "Val Town",
     "category": "Coding",
-    "websiteURL": "https://val.town"
+    "websiteURL": "https://val.town",
+    "composerIcon": "./assets/icon.svg"
   }
 }
