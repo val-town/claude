@@ -38,6 +38,12 @@ codex /plugins
 Codex reads the native marketplace at `.agents/plugins/marketplace.json` (and
 falls back to the Claude `.claude-plugin/marketplace.json` for compatibility).
 
+### Cursor
+
+Install from the [Cursor Marketplace](https://cursor.com/marketplace), or add this
+repo as a marketplace source. Cursor reads `.cursor-plugin/marketplace.json` and
+the per-plugin `plugin/.cursor-plugin/plugin.json`.
+
 ---
 
 Either way, this makes the platform skills available to the agent and registers
