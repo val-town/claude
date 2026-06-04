@@ -48,11 +48,17 @@ Search for Val Town, hit install, and it'll take you through the OAuth path.
 
 1. Click "Plugins" in the sidebar
 2. In the dropdown that says "Built by OpenAI" click "Add more +"
-3. Paste this GitHub repo's URL, `https://github.com/val-town/plugins`, and select "Add marketplace"
+3. Copy-paste `https://github.com/val-town/plugins` and select "Add marketplace"
 
 ### Cursor
 
-In Cursor Settings, copy-paste this GitHub repo's URL, `https://github.com/val-town/plugins`, in the search box, then select "Add to Cursor."
+In Cursor, run:
+
+```
+/add-plugin valtown
+```
+
+Or in Cursor Settings, copy-paste `https://github.com/val-town/plugins` in the search box and select "Add to Cursor."
 
 ## Contributing
 
