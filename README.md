@@ -2,13 +2,9 @@
 
 Installs the Val Town MCP server and Skills for Claude Code, Codex, and Cursor.
 
-Contains platform guidance for building on [Val Town](https://val.town) — the 
-single source of truth for the "how to write a val" knowledge used by Val Town's 
-own tools (Townie, the MCP server) and by AI coding agents.
-
-Each skill is a short markdown guide covering one platform topic (HTTP vals,
-cron/intervals, SQLite, email, OAuth, React UI, third-party integrations,
-templates).
+Skills are markdown files with platform guidance for building on [Val Town](https://val.town).
+Used by Val Town's own tools (Townie, the MCP server) and by AI coding agents.
+Skills include HTTP vals, crons, SQLite, email, OAuth, frontend, and API integrations.
 
 ## Install
 
