@@ -56,8 +56,7 @@ Search for Val Town, hit install, and it'll take you through the OAuth path.
 
 ### Cursor
 
-Install from the [Cursor Marketplace](https://cursor.com/marketplace), or add this
-repo as a marketplace source.
+In Cursor Settings, copy-paste this GitHub repo's URL, `https://github.com/val-town/plugins`, in the search box, then select "Add to Cursor."
 
 ## Contributing
 
