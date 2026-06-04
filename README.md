@@ -1,16 +1,24 @@
-# Claude Code plugin for Val Town
+# Agent plugins for Val Town
 
-Installs the Val Town MCP server and skills for Claude Code.
+Installs the Val Town MCP server and Skills for Claude Code, Codex, and Cursor.
 
 Contains platform guidance for building on [Val Town](https://val.town) — the 
 single source of truth for the "how to write a val" knowledge used by Val Town's 
-own tools (Townie, the MCP server) and by AI coding tools like Claude Code.
+own tools (Townie, the MCP server) and by AI coding agents.
 
 Each skill is a short markdown guide covering one platform topic (HTTP vals,
 cron/intervals, SQLite, email, OAuth, React UI, third-party integrations,
 templates).
 
 ## Install
+
+Installing the plugin makes platform skills available to your agent and registers
+the hosted Val Town MCP server (`https://api.val.town/v3/mcp`). On first use of
+an MCP tool, the agent runs the OAuth flow in your browser.
+
+1. [Claude Code](#claude-code)
+2. [Codex](#codex)
+3. [Cursor](#cursor)
 
 ### Claude Code
 
@@ -26,29 +34,26 @@ Then run:
 /plugin install vals@valtown
 ```
 
-### OpenAI Codex
+### Codex
 
-Add the marketplace, then install the plugin:
+First, run:
 
 ```
 codex plugin marketplace add val-town/plugins
-codex /plugins
 ```
 
-Codex reads the native marketplace at `.agents/plugins/marketplace.json` (and
-falls back to the Claude `.claude-plugin/marketplace.json` for compatibility).
+Then fire up `codex` and run:
+
+```
+/plugins
+```
+
+Search for Val Town, hit install, and it'll take you through the OAuth path.
 
 ### Cursor
 
 Install from the [Cursor Marketplace](https://cursor.com/marketplace), or add this
-repo as a marketplace source. Cursor reads `.cursor-plugin/marketplace.json` and
-the per-plugin `plugin/.cursor-plugin/plugin.json`.
-
----
-
-Either way, this makes the platform skills available to the agent and registers
-the hosted Val Town MCP server (`https://api.val.town/v3/mcp`). On first use of
-an MCP tool, the agent runs the OAuth flow in your browser.
+repo as a marketplace source.
 
 ## Contributing
 
@@ -106,3 +111,18 @@ for publishing. See their documentation for more information.
 - Each change in that directory will prompt the `release.yml` GitHub action
   to create a new release PR.
 - Merging a release PR will automatically publish a new version of this module.
+
+### Configuration
+
+#### Claude Code
+
+The official Claude plugin marketplace pulls from [`.plugins/marketplace.json`](./.plugins/marketplace.json).
+
+#### Codex
+
+Codex reads the native marketplace at `.agents/plugins/marketplace.json` (and
+falls back to the Claude `.claude-plugin/marketplace.json` for compatibility).
+
+#### Cursor
+
+Cursor reads `.cursor-plugin/marketplace.json` and the per-plugin `plugin/.cursor-plugin/plugin.json`.
