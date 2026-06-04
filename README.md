@@ -36,6 +36,8 @@ Then run:
 
 ### Codex
 
+#### `codex` CLI
+
 First, run:
 
 ```
@@ -49,6 +51,12 @@ Then fire up `codex` and run:
 ```
 
 Search for Val Town, hit install, and it'll take you through the OAuth path.
+
+#### Codex desktop app
+
+1. Click "Plugins" in the sidebar
+2. In the dropdown that says "Built by OpenAI" click "Add more +"
+3. Paste this GitHub repo's URL, `https://github.com/val-town/plugins`, and select "Add marketplace"
 
 ### Cursor
 
