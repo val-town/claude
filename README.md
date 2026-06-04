@@ -18,17 +18,13 @@ an MCP tool, the agent runs the OAuth flow in your browser.
 
 ### Claude Code
 
-Start a `claude` session, then run:
+Install the Val Town plugin by running:
 
 ```
-/plugin marketplace add val-town/plugins
+claude plugin install valtown@claude-plugins-official
 ```
 
-Then run:
-
-```
-/plugin install vals@valtown
-```
+Alternatively, you can start `claude`, type `/plugin`, and search for `valtown` in the official Claude plugins marketplace.
 
 ### Codex
 
