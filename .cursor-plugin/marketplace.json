@@ -10,7 +10,7 @@
   },
   "plugins": [
     {
-      "name": "vals",
+      "name": "valtown",
       "source": "./plugin",
       "description": "Val Town MCP server + platform skills for building and deploying vals."
     }
