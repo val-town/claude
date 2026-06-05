@@ -24,8 +24,6 @@ Install the Val Town plugin by running:
 claude plugin install valtown@claude-plugins-official
 ```
 
-Alternatively, you can start `claude`, type `/plugin`, and search for `valtown` in the official Claude plugins marketplace.
-
 ### Codex
 
 #### `codex` CLI
