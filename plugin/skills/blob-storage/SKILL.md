@@ -8,10 +8,40 @@ triggers: [blob, storage, kv, key-value, persistence, cache, store, upload, file
 
 Val Town provides built-in key/value blob storage via the `std/blob` module. Reach for it whenever a val needs to persist simple values — JSON documents, cached API responses, uploaded files, or binary assets — keyed by a string. For relational or structured data you query with SQL, prefer `std/sqlite` instead.
 
+## Scoping: account-global or per-val depending on import
+
+There are two exports of the blob utility: `global.ts`, which is scoped to the user account, and `main.ts`, which is scoped to the val itself. Prefer the `main.ts` interface and val scoping for new vals.
+
+Here is the scoped import:
+
+```ts
+/**
+ * Importing from `main.ts` provides an interface to val-scoped blobs.
+ */
+import { blob } from "https://esm.town/v/std/blob/main.ts";
+```
+
+Here are the global imports:
+
+```ts
+/**
+ * Importing from `global.ts` provides a blob interface that is scoped
+ * to your account.
+ */
+import { blob } from "https://esm.town/v/std/blob/global.ts";
+/**
+ * This entrypoint is also available as `v/std/blob`. This is common
+ * in older vals.
+ */
+import { blob } from "https://esm.town/v/std/blob";
+```
+
+Scoped & global blobs are stored separately: you cannot access global blobs with the scoped interface or vice versa.
+
 ## Basic usage (JSON)
 
 ```ts
-import { blob } from "https://esm.town/v/std/blob";
+import { blob } from "https://esm.town/v/std/blob/main.ts";
 
 await blob.setJSON("config", { theme: "dark", count: 0 });
 
@@ -54,11 +84,6 @@ await blob.move("draft", "published");   // rename / relocate
 
 `list(prefix?)` returns an array of `{ key: string; size: number; lastModified: string }` — objects, not bare key strings.
 
-## Scoping: account-global, not per-val
-
-**Blob storage is scoped to the owning account, shared across every val it owns** — not isolated per val like a val-scoped SQLite database. If you `setJSON("config", …)` in one val, another val owned by the same account reads the same key. (Your personal account counts as one such scope; an organization is another.)
-
-Because the namespace is shared, **prefix your keys to avoid collisions** between vals — e.g. `myapp:config`, `myapp:sessions:<id>`. The `prefix` argument to `list` then lets you enumerate just one val's keys.
 
 ## Limits
 
