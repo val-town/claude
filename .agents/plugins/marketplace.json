@@ -1,0 +1,21 @@
+{
+  "name": "valtown",
+  "interface": {
+    "displayName": "Val Town"
+  },
+  "plugins": [
+    {
+      "name": "vals",
+      "source": {
+        "source": "local",
+        "path": "./plugin"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Coding",
+      "description": "Val Town MCP server + platform skills for building and deploying vals."
+    }
+  ]
+}

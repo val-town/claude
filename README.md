@@ -1,32 +1,62 @@
-# Claude Code plugin for Val Town
+# Agent plugins for Val Town
 
-Installs the Val Town MCP server and skills for Claude Code.
+Installs the Val Town MCP server and Skills for Claude Code, Codex, and Cursor.
 
-Contains platform guidance for building on [Val Town](https://val.town) — the 
-single source of truth for the "how to write a val" knowledge used by Val Town's 
-own tools (Townie, the MCP server) and by AI coding tools like Claude Code.
-
-Each skill is a short markdown guide covering one platform topic (HTTP vals,
-cron/intervals, SQLite, email, OAuth, React UI, third-party integrations,
-templates).
+Skills are markdown files with platform guidance for building on [Val Town](https://val.town).
+Used by Val Town's own tools (Townie, the MCP server) and by AI coding agents.
+Skills include HTTP vals, crons, SQLite, email, OAuth, frontend, and API integrations.
 
 ## Install
 
-Start a `claude` session, then run:
+Installing the plugin makes platform skills available to your agent and registers
+the hosted Val Town MCP server (`https://api.val.town/v3/mcp`). On first use of
+an MCP tool, the agent runs the OAuth flow in your browser.
+
+1. [Claude Code](#claude-code)
+2. [Codex](#codex)
+3. [Cursor](#cursor)
+
+### Claude Code
+
+Install the Val Town plugin by running:
 
 ```
-/plugin marketplace add val-town/plugins
+claude plugin install valtown@claude-plugins-official
 ```
 
-Then run:
+### Codex
+
+#### `codex` CLI
+
+First, run:
 
 ```
-/plugin install vals@valtown
+codex plugin marketplace add val-town/plugins
 ```
 
-This makes the platform skills available to Claude and registers the hosted
-Val Town MCP server (`https://api.val.town/v3/mcp`). On first use of an MCP tool,
-Claude Code runs the OAuth flow in your browser.
+Then fire up `codex` and run:
+
+```
+/plugins
+```
+
+Search for Val Town, hit install, and it'll take you through the OAuth path.
+
+#### Codex desktop app
+
+1. Click "Plugins" in the sidebar
+2. In the dropdown that says "Built by OpenAI" click "Add more +"
+3. Copy-paste `https://github.com/val-town/plugins` and select "Add marketplace"
+
+### Cursor
+
+In Cursor, run:
+
+```
+/add-plugin valtown
+```
+
+Or in Cursor Settings, copy-paste `https://github.com/val-town/plugins` in the search box and select "Add to Cursor."
 
 ## Contributing
 
@@ -84,3 +114,18 @@ for publishing. See their documentation for more information.
 - Each change in that directory will prompt the `release.yml` GitHub action
   to create a new release PR.
 - Merging a release PR will automatically publish a new version of this module.
+
+### Configuration
+
+#### Claude Code
+
+The official Claude plugin marketplace pulls from [`.plugins/marketplace.json`](./.plugins/marketplace.json).
+
+#### Codex
+
+Codex reads the native marketplace at `.agents/plugins/marketplace.json` (and
+falls back to the Claude `.claude-plugin/marketplace.json` for compatibility).
+
+#### Cursor
+
+Cursor reads `.cursor-plugin/marketplace.json` and the per-plugin `plugin/.cursor-plugin/plugin.json`.

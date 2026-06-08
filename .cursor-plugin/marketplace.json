@@ -1,0 +1,18 @@
+{
+  "name": "valtown",
+  "owner": {
+    "name": "Val Town",
+    "url": "https://val.town"
+  },
+  "metadata": {
+    "description": "Val Town MCP server + platform skills for building and deploying vals.",
+    "version": "0.1.2"
+  },
+  "plugins": [
+    {
+      "name": "valtown",
+      "source": "./plugin",
+      "description": "Val Town MCP server + platform skills for building and deploying vals."
+    }
+  ]
+}
