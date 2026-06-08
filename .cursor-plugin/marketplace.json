@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Val Town MCP server + platform skills for building and deploying vals.",
-    "version": "0.1.2"
+    "version": "0.2.0"
   },
   "plugins": [
     {
