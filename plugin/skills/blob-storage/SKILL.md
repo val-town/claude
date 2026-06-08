@@ -36,6 +36,8 @@ import { blob } from "https://esm.town/v/std/blob/global.ts";
 import { blob } from "https://esm.town/v/std/blob";
 ```
 
+The scoped & global `blob` interfaces have the same methods.
+
 Scoped & global blobs are stored separately: you cannot access global blobs with the scoped interface or vice versa.
 
 ## Basic usage (JSON)
