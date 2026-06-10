@@ -1,6 +1,6 @@
 ---
 name: blob-storage
-description: Use when a val needs simple key/value persistence — JSON documents, cached responses, uploaded files, or binary assets. Covers the std/blob API, listing and deleting keys, account-global scoping, and storage limits.
+description: Use when a val needs simple key/value persistence — JSON documents, cached responses, uploaded files, or binary assets. Covers the std/blob API, listing and deleting keys, account-global or val scoping, and storage limits.
 triggers: [blob, storage, kv, key-value, persistence, cache, store, upload, file, json, asset, binary]
 ---
 
