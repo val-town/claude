@@ -1,5 +1,12 @@
 # @valtown/skills
 
+## 0.2.1
+
+### Patch Changes
+
+- d0e42bd: Add more details to OAuth skill
+- 1e70508: Improve the title of the blobs skill
+
 ## 0.2.0
 
 ### Minor Changes

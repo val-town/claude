@@ -1,6 +1,6 @@
 {
   "name": "@valtown/skills",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Val Town platform skills — guidance for building on Val Town, usable as a library and as a Claude Code plugin.",
   "license": "MIT",
   "type": "module",
