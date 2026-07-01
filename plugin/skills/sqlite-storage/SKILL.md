@@ -34,7 +34,10 @@ Use `sqlite.batch` for atomic multi-statement transactions — all succeed or al
 
 ```ts
 await sqlite.batch([
-  { sql: "INSERT INTO users (name, email) VALUES (?, ?)", args: ["Bob", "bob@example.com"] },
+  {
+    sql: "INSERT INTO users (name, email) VALUES (?, ?)",
+    args: ["Bob", "bob@example.com"],
+  },
   { sql: "UPDATE users SET name = ? WHERE id = ?", args: ["Robert", 2] },
 ]);
 ```
@@ -57,6 +60,10 @@ When using the `sqlite_execute` or `sqlite_batch` tools to query a val owned by 
 - Always use parameterized queries (the `args` field) for any value derived from user input. Never interpolate strings into SQL.
 - Use `CREATE TABLE IF NOT EXISTS` so schema setup is idempotent across val restarts.
 - Schema migrations: add new columns with `ALTER TABLE ... ADD COLUMN`. Wrap in `try/catch` if the migration may run against an already-updated table.
+
+## Transfer between orgs
+
+SQLite data scoped to a val will automatically transfer when transferring the val to a different org.
 
 ## Reference
 

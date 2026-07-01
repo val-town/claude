@@ -1,7 +1,40 @@
 ---
 name: third-party-integrations
 description: Use when a val talks to an external service — Slack, Discord, Telegram, Stripe, GitHub, Gmail, Google Sheets, Postgres/Supabase/Upstash/Neon, browser automation (Playwright, Browserbase, Kernel, Steel), web scraping, PDF generation, push notifications, RSS, or any other third-party API. Covers the required workflow (fetch the Val Town guide, get credentials, test, store secrets) and the catalog of available guides.
-triggers: [integration, third-party, external, service, api, slack, discord, telegram, stripe, github, gmail, sheets, google, neon, postgres, supabase, upstash, database, playwright, browser, browserbase, kernel, steel, browserless, scraping, scrape, pdf, rss, push, notification, webhook]
+triggers:
+  [
+    integration,
+    third-party,
+    external,
+    service,
+    api,
+    slack,
+    discord,
+    telegram,
+    stripe,
+    github,
+    gmail,
+    sheets,
+    google,
+    neon,
+    postgres,
+    supabase,
+    upstash,
+    database,
+    playwright,
+    browser,
+    browserbase,
+    kernel,
+    steel,
+    browserless,
+    scraping,
+    scrape,
+    pdf,
+    rss,
+    push,
+    notification,
+    webhook,
+  ]
 ---
 
 # Third-Party Integrations
@@ -33,3 +66,7 @@ Services with dedicated guides today — not exhaustive, so use the sitemap from
 ## Why this matters
 
 Integration code is the most common place models hallucinate. APIs change, auth flows get reworked, and platform constraints (no filesystem, no subprocess) break naive approaches. The Val Town guide is the source of truth for what currently works on the platform.
+
+## Transferring secrets between orgs
+
+Note that environment variables scoped to a val will automatically transfer when transferring the val to a different org. Environment groups will _not_ transfer, nor will (deprecated) account-based environment variables.
