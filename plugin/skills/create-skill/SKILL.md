@@ -14,11 +14,11 @@ A user may choose to centralize their skills in one val or co-locate skills acro
 
 A skill markdown file must have frontmatter:
 
-- `name`: typically matches the subdir name slug
+- `name`: kebab-case name of the skill; contains lowercase letters, numbers, and hyphens
 - `description`: helps the agent decide when the skill is relevant. **A good skill description is critical for agent discovery**
 - `triggers`: (optional) is a list of keywords to tip off the agent
 
-The `description` and `trigger` fields enable skill discovery, i.e. tells the user's AI agent (e.g. Claude Code, Codex, Cursor) when to use it. 
+The `description` and `triggers` fields enable skill discovery, i.e. tells the user's AI agent (e.g. Claude Code, Codex, Cursor) when to use it. 
 The more specific the better, including key terms that should trigger use (which can also be enumerated in `triggers`). 
 Skills without frontmatter will be silently skipped, so Townie/MCP will not be able to access them.
 
@@ -41,14 +41,13 @@ description: Use when styling a val's UI. Use for frontend vals that return JSX 
 triggers: [css, styling, layout, theme]
 ---
 
-- Use CSS modules, not inline styles or Tailwind
+- Use `.css` files, avoid inline styles and Tailwind
 - Locate React components in a `/components` directory, one component per file
 - Use a sans-serif web-native font stack, no external fonts
 - ...
 ```
 
-## Remixing skills
+## Remixing
 
-To adopt another user’s skills, a user or AI agent can remix the val and customize the `SKILL.md` file.
-There is a remix button in the val.town UI, and a `remix_val` tool in the Val Town MCP server.
-It is trivially easy to remix a skill, and customizing skills is powerful because they can be personalized based on a user's specific knowledge and preferences.
+A new skill can be created by remixing another user’s skill and customizing the `SKILL.md` file.
+There is a remix button in the val.town UI, and a `remix_val` tool in the Val Town MCP server to do so.
