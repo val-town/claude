@@ -34,10 +34,7 @@ Use `sqlite.batch` for atomic multi-statement transactions — all succeed or al
 
 ```ts
 await sqlite.batch([
-  {
-    sql: "INSERT INTO users (name, email) VALUES (?, ?)",
-    args: ["Bob", "bob@example.com"],
-  },
+  { sql: "INSERT INTO users (name, email) VALUES (?, ?)", args: ["Bob", "bob@example.com"] },
   { sql: "UPDATE users SET name = ? WHERE id = ?", args: ["Robert", 2] },
 ]);
 ```

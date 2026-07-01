@@ -1,21 +1,7 @@
 ---
 name: blob-storage
 description: Use when a val needs simple key/value persistence — JSON documents, cached responses, uploaded files, or binary assets. Covers the std/blob API, listing and deleting keys, account-global or val scoping, and storage limits.
-triggers:
-  [
-    blob,
-    storage,
-    kv,
-    key-value,
-    persistence,
-    cache,
-    store,
-    upload,
-    file,
-    json,
-    asset,
-    binary,
-  ]
+triggers: [blob, storage, kv, key-value, persistence, cache, store, upload, file, json, asset, binary]
 ---
 
 # Blob Storage
@@ -95,10 +81,11 @@ for (const { key } of entries) {
 }
 
 await blob.copy("config", "config.bak"); // duplicate under a new key
-await blob.move("draft", "published"); // rename / relocate
+await blob.move("draft", "published");   // rename / relocate
 ```
 
 `list(prefix?)` returns an array of `{ key: string; size: number; lastModified: string }` — objects, not bare key strings.
+
 
 ## Limits
 

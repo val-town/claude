@@ -1,21 +1,7 @@
 ---
 name: http-endpoints
 description: Use when building an HTTP val — a web endpoint, API route, webhook receiver, or any val that responds to HTTP requests. Covers the handler signature, Hono usage, the endpoint URL, CORS behavior, redirects, and Val Town-specific limitations.
-triggers:
-  [
-    http,
-    endpoint,
-    webhook,
-    api,
-    request,
-    response,
-    hono,
-    web,
-    route,
-    fetch,
-    cors,
-    redirect,
-  ]
+triggers: [http, endpoint, webhook, api, request, response, hono, web, route, fetch, cors, redirect]
 ---
 
 # HTTP Endpoints
@@ -61,7 +47,7 @@ Hono's `serveStatic` does **not** work on Val Town. Use `serveFile` / `staticHTT
 
 ## CORS
 
-Val Town adds permissive CORS headers by default (`Access-Control-Allow-Origin: *`), so in 99% of cases, you should never need to do anything with CORS. Using Hono's `cors` middleware is almost always unnecessary.
+Val Town adds permissive CORS headers by default (`Access-Control-Allow-Origin: *`), so in 99% of cases, you should never need to do anything with CORS. Using Hono's `cors` middleware is almost always unnecessary. 
 
 If you set **any** CORS header yourself, Val Town stops adding **all** default headers — so either handle CORS completely yourself or don't touch it at all.
 
