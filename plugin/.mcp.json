@@ -2,7 +2,10 @@
   "mcpServers": {
     "valtown": {
       "type": "http",
-      "url": "https://api.val.town/v3/mcp"
+      "url": "https://api.val.town/v3/mcp",
+      "oauth": {
+        "authServerMetadataUrl": "https://api.val.town/.well-known/oauth-authorization-server"
+      }
     }
   }
 }
