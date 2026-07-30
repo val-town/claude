@@ -44,28 +44,29 @@ and paths don't resolve, pass `import.meta.url` as the second argument.
 ## Default: versioned, immutably cached modules
 
 Served this way, every page load refetches and re-transpiles every module. The
-default pattern adds version-stamped URLs with immutable caching on top —
+default pattern adds version-addressed URLs with immutable caching on top —
 measured on a 3-module React app, repeat visits went **665ms → 157ms with zero
 asset requests**:
 
 ```ts
-import { versionedAssets } from "https://esm.town/v/std/utils/index.ts";
-
-const assets = versionedAssets();
+import { serveImmutableFile } from "https://esm.town/v/std/utils/index.ts";
 
 // current version → served with Cache-Control: immutable; stale version → 302
-app.get("/v*", (c) => assets.serve(c.req.raw));
+app.get("/__immutable/*", (c) => serveImmutableFile(c.req.path));
 ```
 
-In the HTML shell, stamp the entry module with `assets.url("/frontend/index.tsx")`,
-which returns `/v42/frontend/index.tsx` (42 = the val's current version). Relative
-imports resolve under the same `/v42/` prefix, so the whole client module graph is
-version-addressed automatically — only the entry needs stamping.
+In the HTML shell, stamp the entry module with `immutableFileUrl("/frontend/index.tsx")`,
+which returns `/__immutable/42/frontend/index.tsx` (42 = the val's current version).
+Relative imports resolve under the same `/__immutable/42/` prefix, so the whole client
+module graph is version-addressed automatically — only the entry needs stamping. This
+works for root-level files too: `immutableFileUrl("/logo.png")` → `/__immutable/42/logo.png`.
 
 Invalidation is automatic: publishing the val bumps its version, the never-cached
 shell stamps the new prefix, and browsers refetch each asset exactly once; requests
-for old versions 302 to the current one. Paths without a `/v<version>/` prefix fall
-through to plain uncached `serveFile`, so unstamped URLs keep working.
+for old versions 302 to the current one. Keep a plain `serveFile` route as the
+fallback so unstamped URLs keep working — or point that route at `serveImmutableFile`
+too, which 302s bare paths into `/__immutable/<version>/` (zero config, at the cost
+of one redirect per page view).
 
 ### Alternative: serve directly from esm.town
 

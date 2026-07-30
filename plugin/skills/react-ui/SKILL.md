@@ -38,20 +38,21 @@ Avoid inline `<style>` tags, CSS-in-JS objects, or separate `.css` files, unless
 
 ## Serving assets: versioned + immutable
 
-Serve client modules through `versionedAssets` from `std/utils` so repeat visits
+Serve client modules through `serveImmutableFile` from `std/utils` so repeat visits
 load them from the browser cache instead of re-transpiling per request (measured:
-repeat visits 665ms → 157ms, zero asset requests). The shell stamps the entry
-module URL; publishing the val bumps the version, which invalidates instantly:
+repeat visits 665ms → 157ms, zero asset requests). A never-cached `frontend/root.tsx`
+shell component (hono/jsx) stamps the entry module and favicon URLs with
+`immutableFileUrl`; publishing the val bumps the version, which invalidates instantly:
 
 ```tsx
-import { versionedAssets } from "https://esm.town/v/std/utils/index.ts";
-const assets = versionedAssets();
+import { immutableFileUrl, serveImmutableFile } from "https://esm.town/v/std/utils/index.ts";
 
-// In the HTML shell:
-<script src={assets.url("/frontend/index.tsx")} type="module" />
+// frontend/root.tsx — in the Root() HTML shell:
+<script src={immutableFileUrl("/frontend/index.tsx")} type="module" />
 
-// In the Hono app — current version → immutable cache, stale → 302 to current:
-app.get("/v*", (c) => assets.serve(c.req.raw));
+// index.ts — the Hono app; current version → immutable cache, stale → 302 to current:
+app.get("/", (c) => c.html(Root()));
+app.get("/__immutable/*", (c) => serveImmutableFile(c.req.path));
 ```
 
 See the `client-side-js` skill for how modules and their imports are served.
