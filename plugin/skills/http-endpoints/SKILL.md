@@ -31,10 +31,9 @@ const app = new Hono();
 
 app.get("/", (c) => c.text("hello"));
 
-// Immutable asset caching (see the client-side-js skill): stamped current-version
-// URLs serve immutably, bare paths 302 into versioned space
+// Immutable asset caching (see the client-side-js skill): serves the
+// current-version URLs your HTML shell stamps with immutableFileUrl()
 app.get("/__immutable/*", (c) => serveImmutableFile(c.req.path));
-app.get("/frontend/**/*", (c) => serveImmutableFile(c.req.path));
 
 // View source redirect
 app.get("/source", (c) => c.redirect(parseVal().links.self.val));

@@ -51,18 +51,19 @@ automatically. Measured: repeat visits **665ms → 157ms with zero asset request
 import { immutableFileUrl, serveImmutableFile } from "https://esm.town/v/std/utils/index.ts";
 
 app.get("/__immutable/*", (c) => serveImmutableFile(c.req.path));
-app.get("/frontend/**/*", (c) => serveImmutableFile(c.req.path)); // bare paths 302 into versioned space
 ```
 
 In the never-cached HTML shell, stamp the entry module:
 `immutableFileUrl("/frontend/index.tsx")` → `/__immutable/42/frontend/index.tsx`
 (42 = the val's current version). Relative imports resolve under the same prefix,
-so only the entry needs stamping.
+so only the entry needs stamping — one route and one stamped URL cover the whole
+client graph.
 
-- Stamping skips the bare-path redirect; unstamped URLs still work, at one
-  redirect per page view.
 - Old-version URLs 404 after a publish (like Next.js build assets); a reload
   picks up the new version.
+- Retrofitting an existing val without touching its shell? Also point its old
+  file route at `serveImmutableFile` — bare paths then 302 into versioned space,
+  at one redirect per page view.
 
 ### Alternative: serve directly from esm.town
 
