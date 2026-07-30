@@ -25,19 +25,16 @@ When using Hono, export `app.fetch` (not `app`):
 
 ```ts
 import { Hono } from "npm:hono";
-import { parseVal, serveFile, serveImmutableFile } from "https://esm.town/v/std/utils/index.ts";
+import { parseVal, serveImmutableFile } from "https://esm.town/v/std/utils/index.ts";
 
 const app = new Hono();
 
 app.get("/", (c) => c.text("hello"));
 
-// Serve frontend files versioned + immutably cached. The HTML shell stamps asset
-// URLs with immutableFileUrl("/frontend/index.tsx") → "/__immutable/42/frontend/index.tsx";
-// publishing bumps the version, so browsers refetch each asset exactly once.
+// Immutable asset caching (see the client-side-js skill): stamped current-version
+// URLs serve immutably, bare paths 302 into versioned space
 app.get("/__immutable/*", (c) => serveImmutableFile(c.req.path));
-
-// Unstamped fallback, transpiled, with correct content types
-app.get("/frontend/**/*", (c) => serveFile(c.req.path));
+app.get("/frontend/**/*", (c) => serveImmutableFile(c.req.path));
 
 // View source redirect
 app.get("/source", (c) => c.redirect(parseVal().links.self.val));

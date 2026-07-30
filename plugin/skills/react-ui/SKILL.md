@@ -38,24 +38,20 @@ Avoid inline `<style>` tags, CSS-in-JS objects, or separate `.css` files, unless
 
 ## Serving assets: versioned + immutable
 
-Serve client modules through `serveImmutableFile` from `std/utils` so repeat visits
-load them from the browser cache instead of re-transpiling per request (measured:
-repeat visits 665ms → 157ms, zero asset requests). A never-cached `frontend/root.tsx`
-shell component (hono/jsx) stamps the entry module and favicon URLs with
-`immutableFileUrl`; publishing the val bumps the version, which invalidates instantly:
+Serve client modules with `serveImmutableFile` from `std/utils` — browsers cache
+them immutably, and publishing bumps the val's version, which invalidates
+automatically (full pattern: the `client-side-js` skill). A never-cached
+`frontend/root.tsx` shell (hono/jsx) stamps the entry and favicon with
+`immutableFileUrl`:
 
 ```tsx
-import { immutableFileUrl, serveImmutableFile } from "https://esm.town/v/std/utils/index.ts";
-
 // frontend/root.tsx — in the Root() HTML shell:
 <script src={immutableFileUrl("/frontend/index.tsx")} type="module" />
 
-// index.ts — the Hono app; current version → immutable cache, stale → 302 to current:
+// index.ts:
 app.get("/", (c) => c.html(Root()));
 app.get("/__immutable/*", (c) => serveImmutableFile(c.req.path));
 ```
-
-See the `client-side-js` skill for how modules and their imports are served.
 
 ## View source link
 
