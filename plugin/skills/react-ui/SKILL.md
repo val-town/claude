@@ -36,6 +36,26 @@ Then use Tailwind classes directly in JSX:
 
 Avoid inline `<style>` tags, CSS-in-JS objects, or separate `.css` files, unless the user says otherwise.
 
+## Serving assets: versioned + immutable
+
+Serve client modules through `versionedAssets` from `std/utils` so repeat visits
+load them from the browser cache instead of re-transpiling per request (measured:
+repeat visits 665ms → 157ms, zero asset requests). The shell stamps the entry
+module URL; publishing the val bumps the version, which invalidates instantly:
+
+```tsx
+import { versionedAssets } from "https://esm.town/v/std/utils/index.ts";
+const assets = versionedAssets();
+
+// In the HTML shell:
+<script src={assets.url("/frontend/index.tsx")} type="module" />
+
+// In the Hono app — current version → immutable cache, stale → 302 to current:
+app.get("/v*", (c) => assets.serve(c.req.raw));
+```
+
+See the `client-side-js` skill for how modules and their imports are served.
+
 ## View source link
 
 Every UI val should expose a way for users to see and remix its source. Both parts are required:

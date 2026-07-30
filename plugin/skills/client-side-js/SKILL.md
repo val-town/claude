@@ -41,6 +41,32 @@ app.get("/client/**/*", (c) => serveFile(c.req.path));
 `serveFile` defaults to the current val. If you call it from a non-entrypoint file
 and paths don't resolve, pass `import.meta.url` as the second argument.
 
+## Default: versioned, immutably cached modules
+
+Served this way, every page load refetches and re-transpiles every module. The
+default pattern adds version-stamped URLs with immutable caching on top —
+measured on a 3-module React app, repeat visits went **665ms → 157ms with zero
+asset requests**:
+
+```ts
+import { versionedAssets } from "https://esm.town/v/std/utils/index.ts";
+
+const assets = versionedAssets();
+
+// current version → served with Cache-Control: immutable; stale version → 302
+app.get("/v*", (c) => assets.serve(c.req.raw));
+```
+
+In the HTML shell, stamp the entry module with `assets.url("/frontend/index.tsx")`,
+which returns `/v42/frontend/index.tsx` (42 = the val's current version). Relative
+imports resolve under the same `/v42/` prefix, so the whole client module graph is
+version-addressed automatically — only the entry needs stamping.
+
+Invalidation is automatic: publishing the val bumps its version, the never-cached
+shell stamps the new prefix, and browsers refetch each asset exactly once; requests
+for old versions 302 to the current one. Paths without a `/v<version>/` prefix fall
+through to plain uncached `serveFile`, so unstamped URLs keep working.
+
 ### Alternative: serve directly from esm.town
 
 Every val file already has a public esm.town URL that transpiles on demand, so you
