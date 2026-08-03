@@ -93,10 +93,11 @@ async function getViewer(req: Request) {
 
 Rules that matter:
 
-- **Always treat the header as optional.** It is absent on public vals and on bypass-token requests. Never `!`-assert it or index into a null result.
-- **Exchange it during the request.** The signature expires about a minute after it's minted, so don't stash the raw header in a database or a client-side cookie for later use.
-- **The signature is bound to your val.** A header captured from one val can't be redeemed by another, and the exchange requires that val's own token — so it can't be done from a browser.
+- **Always treat the viewer as optional.** There is none on a public val or a bypass-token request. Never `!`-assert it or index into a null result.
+- **Resolve it server-side, on each request.** The credential is short-lived and tied to your val — don't persist it, hand it to the browser, or attempt the lookup from client-side code.
 - **Only public profile fields come back** — handle, bio, avatar, profile URL. No email address, no billing tier. Don't build a val that depends on those.
+
+The transport above (`X-Val-Town-User` plus the `/v3/val/viewer` exchange) is how this works today and may change; the three rules hold regardless.
 
 ## Managing app access
 
