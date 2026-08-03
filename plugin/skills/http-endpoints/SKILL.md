@@ -6,7 +6,9 @@ triggers: [http, endpoint, webhook, api, request, response, hono, web, route, fe
 
 # HTTP Endpoints
 
-HTTP vals (`fileType: "http"`) export a request handler and run on every incoming HTTP request. Each HTTP file is assigned a public live URL — never construct it yourself; read `links.endpoint` from `list_files` or `create_file` responses, or call `fetch_val_endpoint`.
+HTTP vals (`fileType: "http"`) export a request handler and run on every incoming HTTP request. Each HTTP file is assigned a live URL — never construct it yourself; read `links.endpoint` from `list_files` or `create_file` responses, or call `fetch_val_endpoint`.
+
+That URL is open to anyone unless the val's app access (`httpPrivacy`) is `restricted`, in which case unauthenticated callers get a `302` to a login page instead of your response — see the `restricted-access` skill.
 
 ## Basic handler
 
