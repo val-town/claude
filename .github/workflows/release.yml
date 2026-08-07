@@ -9,6 +9,7 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 permissions:
   contents: write
+  issues: write
   pull-requests: write
   id-token: write
 
@@ -39,3 +40,33 @@ jobs:
           publish: npx @changesets/cli publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Codex plugin upload issue
+        if: steps.changesets.outputs.published == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISHED_PACKAGES: ${{ steps.changesets.outputs.publishedPackages }}
+          ASSIGNEE: potluck
+        run: |
+          version="$(
+            jq -er \
+              '.[] | select(.name == "@valtown/skills") | .version' \
+              <<< "$PUBLISHED_PACKAGES"
+          )"
+
+          issue_body="${RUNNER_TEMP}/codex-plugin-upload.md"
+          cat > "$issue_body" <<EOF
+          Changesets published \`@valtown/skills@${version}\`.
+
+          - [ ] Package the Codex plugin from \`plugin/\`
+          - [ ] Upload the new plugin version to Codex
+          - [ ] Verify that the plugin installs and its skills and MCP server load correctly
+
+          [Release](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/releases) · [Workflow run](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}) · [Commit](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA})
+          EOF
+
+          gh issue create \
+            --repo "$GITHUB_REPOSITORY" \
+            --assignee "$ASSIGNEE" \
+            --title "Upload Val Town Codex plugin v${version}" \
+            --body-file "$issue_body"
