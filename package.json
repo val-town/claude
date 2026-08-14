@@ -21,7 +21,7 @@
     "prepare": "npm run build"
   },
   "devDependencies": {
-    "js-yaml": "^4.1.0",
+    "js-yaml": "^5.0.0",
     "@changesets/cli": "^2.31.0",
     "typescript": "^7.0.0"
   },
