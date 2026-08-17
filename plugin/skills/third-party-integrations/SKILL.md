@@ -15,6 +15,8 @@ When a val uses any external service, follow this order — do not skip steps an
 3. **Test the connection** with a minimal script (a single fetch / SDK call that returns one record) before building features on top. This isolates auth/setup problems from feature bugs.
 4. **Store secrets in env vars.** Use `Deno.env.get("KEY_NAME")` to read them, and document the required env vars in the README so the user (or anyone remixing the val) knows what to set. Whenever you reference an env var the user needs to set, show the raw, full URL to the prefilled Val Town env var editor on its own line, in this exact format: `👉 Add KEY_NAME here: https://www.val.town/x/HANDLE/VAL_NAME/environment-variables?key=KEY_NAME`. Keep the URL visible (not hidden behind link text) — it's the call-to-action.
 
+Environment variables set via the Val Town API, SDK (e.g. `client.vals.environmentVariables.update`), or the `add_env_var` MCP tool are picked up by the val on the next HTTP request against the same warm isolate — no redeploy needed. Variables set through the Val Town UI or settings page may behave differently and can require a val edit or redeploy before a warm isolate sees the new value.
+
 ## Available guides
 
 Services with dedicated guides today — not exhaustive, so use the sitemap from step 1 as the current source of truth:
