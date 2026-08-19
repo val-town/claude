@@ -1,5 +1,11 @@
 # @valtown/skills
 
+## 0.4.0
+
+### Minor Changes
+
+- ac81a69: Add parseSkill and scoreSkill methods
+
 ## 0.3.0
 
 ### Minor Changes
