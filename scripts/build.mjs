@@ -17,7 +17,7 @@ import {
 } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import yaml from "js-yaml";
+import { parse } from "yaml";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SKILLS_DIR = join(ROOT, "plugin", "skills");
@@ -50,7 +50,7 @@ function parseSkill(dir) {
   const [, frontmatterRaw, body] = match;
   let fm;
   try {
-    fm = yaml.load(frontmatterRaw);
+    fm = parse(frontmatterRaw);
   } catch (err) {
     errors.push(`${dir}: invalid YAML frontmatter: ${err.message}`);
     return null;
@@ -62,7 +62,9 @@ function parseSkill(dir) {
     errors.push(`${dir}: "name" is required`);
   } else {
     if (!NAME_RE.test(name)) {
-      errors.push(`${dir}: name "${name}" must be lowercase letters, numbers, and hyphens`);
+      errors.push(
+        `${dir}: name "${name}" must be lowercase letters, numbers, and hyphens`,
+      );
     }
     if (name.length > MAX_NAME) {
       errors.push(`${dir}: name "${name}" exceeds ${MAX_NAME} characters`);
@@ -75,19 +77,29 @@ function parseSkill(dir) {
   if (typeof description !== "string" || description.length === 0) {
     errors.push(`${dir}: "description" is required`);
   } else if (description.length > MAX_DESCRIPTION) {
-    errors.push(`${dir}: description is ${description.length} chars (max ${MAX_DESCRIPTION})`);
+    errors.push(
+      `${dir}: description is ${description.length} chars (max ${MAX_DESCRIPTION})`,
+    );
   }
 
   let trig = [];
   if (triggers !== undefined) {
-    if (!Array.isArray(triggers) || triggers.some((t) => typeof t !== "string")) {
+    if (
+      !Array.isArray(triggers) ||
+      triggers.some((t) => typeof t !== "string")
+    ) {
       errors.push(`${dir}: "triggers" must be an array of strings`);
     } else {
       trig = triggers;
     }
   }
 
-  return { name: String(name), description: String(description), triggers: trig, body: body.trim() };
+  return {
+    name: String(name),
+    description: String(description),
+    triggers: trig,
+    body: body.trim(),
+  };
 }
 
 const dirs = readdirSync(SKILLS_DIR, { withFileTypes: true })
@@ -100,13 +112,16 @@ const seen = new Set();
 for (const dir of dirs) {
   const skill = parseSkill(dir);
   if (!skill) continue;
-  if (seen.has(skill.name)) errors.push(`${dir}: duplicate skill name "${skill.name}"`);
+  if (seen.has(skill.name))
+    errors.push(`${dir}: duplicate skill name "${skill.name}"`);
   seen.add(skill.name);
   skills.push(skill);
 }
 
 if (errors.length > 0) {
-  console.error(`\n✗ Skill validation failed:\n${errors.map((e) => `  - ${e}`).join("\n")}\n`);
+  console.error(
+    `\n✗ Skill validation failed:\n${errors.map((e) => `  - ${e}`).join("\n")}\n`,
+  );
   process.exit(1);
 }
 
@@ -118,7 +133,7 @@ const entries = skills
       `    description: ${JSON.stringify(s.description)},\n` +
       `    triggers: ${JSON.stringify(s.triggers)},\n` +
       `    body: ${JSON.stringify(s.body)},\n` +
-      `  },`
+      `  },`,
   )
   .join("\n");
 
