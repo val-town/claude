@@ -21,7 +21,6 @@
     "prepare": "npm run build"
   },
   "devDependencies": {
-    "js-yaml": "^4.1.0",
     "@changesets/cli": "^2.31.0",
     "typescript": "^7.0.0"
   },
@@ -33,5 +32,9 @@
   "publishConfig": {
     "access": "public",
     "provenance": true
+  },
+  "dependencies": {
+    "yaml": "^2.9.0",
+    "zod": "^4.4.3"
   }
 }
