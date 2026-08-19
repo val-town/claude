@@ -36,8 +36,8 @@ jobs:
         id: changesets
         uses: changesets/action@v2.1.1
         with:
-          version: npm run version
-          publish: npx @changesets/cli publish
+          version-script: npm run version
+          publish-script: npx @changesets/cli publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
